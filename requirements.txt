@@ -1,5 +1,5 @@
 joblib
-lightgbm
+lightgbm==3.3.5
 matplotlib
 numpy
 pandas
