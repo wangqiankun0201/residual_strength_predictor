@@ -19,8 +19,8 @@ feature_names = ['Pipe diameter','Wall thickness','Yield strength','Ultimate ten
 st.title("Residual Strength Predictor")
 Pipe_diameter = st.number_input("Pipe diameter(mm):")
 Wall_thickness = st.number_input("Wall thickness(mm):")
-Ultimate_tensile_strength = st.number_input("Ultimate tensile strength(MPa):")
-Yield_strength = st.number_input("Yield strength(MPa):")
+Yield strength = st.number_input("Yield strength(MPa):")
+Ultimate tensile strength = st.number_input("Ultimate tensile strength(MPa):")
 Elastic_modulus = st.number_input("Elastic modulus(MPa):")
 Defect_depth = st.number_input("Defect depth(mm):")
 Defect_length = st.number_input("Defect_length(mm):")
@@ -98,3 +98,4 @@ if st.button("Predict"):
     #     with col2:
 
     #         st.image("bar_plot3.png", use_column_width=True)
+
