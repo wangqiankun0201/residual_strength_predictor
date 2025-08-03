@@ -13,7 +13,7 @@ scaler = joblib.load('scaler.pkl')
 
 
 # Define feature names
-feature_names = ['Pipe diameter','Wall thickness','Ultimate tensile strength','Yield strength','Elastic modulus',
+feature_names = ['Pipe diameter','Wall thickness','Yield strength','Ultimate tensile strength','Elastic modulus',
                  'Defect depth','Defect length','Defect width']
 # Streamlit user interface
 st.title("Residual Strength Predictor")
@@ -96,4 +96,5 @@ if st.button("Predict"):
     #     with col1:
     #         st.image("shap_force_plot.png", use_column_width=True)
     #     with col2:
+
     #         st.image("bar_plot3.png", use_column_width=True)
