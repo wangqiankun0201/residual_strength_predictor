@@ -26,7 +26,7 @@ Defect_depth = st.number_input("Defect depth(mm):")
 Defect_length = st.number_input("Defect_length(mm):")
 Defect_width = st.number_input("Defect_width(mm):")
 # Process inputs and make predictions
-feature_values = [Pipe_diameter, Wall_thickness,Yield_strengt, hUltimate_tensile_strength, Elastic_modulus, Defect_depth, Defect_length, Defect_width]
+feature_values = [Pipe_diameter, Wall_thickness,Yield_strength, Ultimate_tensile_strength, Elastic_modulus, Defect_depth, Defect_length, Defect_width]
 features = np.array([feature_values])
 features = scaler.transform(features)
 print(feature_values)
@@ -98,5 +98,6 @@ if st.button("Predict"):
     #     with col2:
 
     #         st.image("bar_plot3.png", use_column_width=True)
+
 
 
