@@ -8,23 +8,82 @@ import matplotlib.pyplot as plt
 model = joblib.load('LightGBM.pkl')
 scaler = joblib.load('scaler.pkl')
 
-
-
-
-
 # Define feature names
 feature_names = ['Pipe diameter','Wall thickness','Yield strength','Ultimate tensile strength','Elastic modulus',
                  'Defect depth','Defect length','Defect width']
-# Streamlit user interface
-st.title("Residual Strength Predictor")
-Pipe_diameter = st.number_input("Pipe diameter(mm):")
-Wall_thickness = st.number_input("Wall thickness(mm):")
-Yield_strength = st.number_input("Yield strength(MPa):")
-Ultimate_tensile_strength = st.number_input("Ultimate tensile strength(MPa):")
-Elastic_modulus = st.number_input("Elastic modulus(MPa):")
-Defect_depth = st.number_input("Defect depth(mm):")
-Defect_length = st.number_input("Defect_length(mm):")
-Defect_width = st.number_input("Defect_width(mm):")
+from PIL import Image
+
+st.set_page_config(layout="wide")  # 页面设置为宽屏模式
+
+# 自定义标题样式（居中 + Times New Roman）
+st.markdown(
+    """
+    <style>
+    .centered-title {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 40px;
+        text-align: center;
+        font-weight: bold;
+        margin-top: 20px;
+        margin-bottom: 40px;
+        background-color: #e6f0ff; /* 淡蓝色背景 */
+        border-radius: 10px;       /* 圆角边框 */
+    }
+    </style>
+    <div class="centered-title">An Interpretable Residual Strength Calculator</div>
+    """,
+    unsafe_allow_html=True
+)
+
+# 左右列布局
+left_col, right_col = st.columns([1, 2])  # 左边1/3放图片，右边2/3放表单
+
+# 左边图片
+with left_col:
+    image = Image.open("pipeline.png")
+    st.image(image, use_column_width=True)
+
+# 右边表单输入区域
+with right_col:
+    # 样式：放大输入框和标签
+    st.markdown(
+        """
+        <style>
+        input[type="number"] {
+            height: 50px !important;
+            font-size: 18px !important;
+        }
+        label {
+            font-size: 16px !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # 第一行
+    row1 = st.columns(3)
+    Pipe_diameter = row1[0].number_input("Pipe diameter (mm):")
+    Wall_thickness = row1[1].number_input("Wall thickness (mm):")
+    Yield_strength = row1[2].number_input("Yield strength (MPa):")
+
+    # 第二行
+    row2 = st.columns(3)
+    Ultimate_tensile_strength = row2[0].number_input("Ultimate tensile strength (MPa):")
+    Elastic_modulus = row2[1].number_input("Elastic modulus (MPa):")
+    Defect_depth = row2[2].number_input("Defect depth (mm):")
+
+    # 第三行
+    row3 = st.columns(3)
+    Defect_length = row3[0].number_input("Defect length (mm):")
+    Defect_width = row3[1].number_input("Defect width (mm):")
+    row3[2].markdown(" ")  # 占位空白，让布局整齐
+
+    # 第四行（提交按钮）
+    row4 = st.columns(3)
+    with row4[0]:
+        st.button("Predict", key="submit_button")
+
 # Process inputs and make predictions
 feature_values = [Pipe_diameter, Wall_thickness,Yield_strength, Ultimate_tensile_strength, Elastic_modulus, Defect_depth, Defect_length, Defect_width]
 features = np.array([feature_values])
@@ -35,8 +94,9 @@ plt.rcParams['font.family'] = 'serif'
 plt.rcParams['font.serif'] = 'Times New Roman'
 plt.rcParams['font.size'] = 13  # 设置字体大小为14
 # feature_label=['Pipe diameter','Wall thickness','Ultimate tensile strength','Yield strength','Elastic modulus','Defect depth','Defect length','Defect width']
-if st.button("Predict"):
+if st.session_state.get("submit_button"):
     # Predict result
+    st.success("Inputs submitted successfully!")
     result = model.predict(features)[0]
     # Display prediction results
     st.write(f"**Based on the provided feature values, the residual strength predicted by the CopulaGAN-LightGBM model is:** {result}")
