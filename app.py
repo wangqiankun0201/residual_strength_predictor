@@ -41,7 +41,7 @@ left_col, right_col = st.columns([1, 2])  # 左边1/3放图片，右边2/3放表
 # 左边图片
 with left_col:
     image = Image.open("pipeline.png")
-    st.image(image, use_column_width=True)
+    st.image(image, use_container_width=True)
 
 # 右边表单输入区域
 with right_col:
@@ -158,6 +158,7 @@ if st.session_state.get("submit_button"):
     #     with col2:
 
     #         st.image("bar_plot3.png", use_column_width=True)
+
 
 
 
